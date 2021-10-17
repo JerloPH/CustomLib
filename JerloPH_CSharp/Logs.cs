@@ -9,13 +9,15 @@ namespace JerloPH_CSharp
         private static string FILE_LOG = "";
         private static string FILE_LOG_ERR = "";
         private static string FILE_LOG_DEBUG = "";
+        private static bool isUseFullDate = true;
 
-        public static void Initialize(string _startPath, string _mainlog, string _errlog, string _debuglog)
+        public static void Initialize(string _startPath, string _mainlog, string _errlog, string _debuglog, bool _useFulldate)
         {
             DIR_START = _startPath;
             FILE_LOG = _mainlog;
             FILE_LOG_ERR = _errlog;
             FILE_LOG_DEBUG = _debuglog;
+            isUseFullDate = _useFulldate;
         }
 
         public static void LogString(string file, string log)
@@ -37,7 +39,7 @@ namespace JerloPH_CSharp
                 {
                     using (StreamWriter s = new StreamWriter(fs))
                     {
-                        s.WriteLine($"[{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")}]: {content}");
+                        s.WriteLine($"[{DateTime.Now.ToString(isUseFullDate ? "yyyy-MM-dd HH:mm:ss,fff" : "HH:mm:ss")}]: {content}");
                         s.Close();
                     }
                     fs.Close();
