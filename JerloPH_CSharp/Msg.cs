@@ -55,18 +55,18 @@ namespace JerloPH_CSharp
             catch { }
         }
 
-        public static Form Load(string message, string caption, long maxProgress)
+        public static frmLoading Load(string message, string caption, long maxProgress)
         {
             var form = new frmLoading(message, (!String.IsNullOrWhiteSpace(caption) ? caption : CAPTION_DIALOG), maxProgress);
             return form;
         }
-        public static Form Load(string message, string caption)
+        public static frmLoading Load(string message, string caption)
         {
             var form = new frmLoading(message, (!String.IsNullOrWhiteSpace(caption) ? caption : CAPTION_DIALOG), 0);
             return form;
         }
 
-        public static Form ShowNoParent(string msg, string caption)
+        public static frmAlert ShowNoParent(string msg, string caption)
         {
             var form = new frmAlert(msg, (!String.IsNullOrWhiteSpace(caption) ? caption : CAPTION_DIALOG), 0, null, LoadIcons.Default);
             form.TopMost = true;
