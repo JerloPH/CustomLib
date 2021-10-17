@@ -31,7 +31,7 @@ namespace JerloPH_CSharp
                 try
                 {
                     if (!String.IsNullOrWhiteSpace(log) && !String.IsNullOrWhiteSpace(DIR_START))
-                        content = log.Replace(DIR_START.Replace(@"/", @"\"), "<root>");
+                        content = log.Replace(DIR_START.Replace(@"/", @"\"), "<root>\\");
                 }
                 catch { }
 
