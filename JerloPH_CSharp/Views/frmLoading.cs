@@ -99,27 +99,10 @@ namespace JerloPH_CSharp.Views
         }
         public void SetIcon(LoadIcons IconIndex)
         {
-            Bitmap image = null;
+            
             try
             {
-                switch (IconIndex)
-                {
-                    case LoadIcons.Check:
-                        image = Resources.IconCheckmark;
-                        break;
-                    case LoadIcons.Warning:
-                        image = Resources.IconWarning;
-                        break;
-                    case LoadIcons.Question:
-                        image = Resources.IconQuestion;
-                        break;
-                    case LoadIcons.Error:
-                        image = Resources.IconError;
-                        break;
-                    default:
-                        image = Resources.LoadingColored;
-                        break;
-                }
+                Bitmap image = (Bitmap)Msg.GetImageIcon(IconIndex);
                 if (picLoading.InvokeRequired)
                 {
                     this.BeginInvoke((Action)delegate
@@ -162,11 +145,7 @@ namespace JerloPH_CSharp.Views
                 e.Cancel = true;
 
             picLoading.Image?.Dispose();
-            try
-            {
-                this.Parent?.Focus();
-            }
-            catch { }
+            Msg.RefocusParent(this);
             Dispose();
         }
 
