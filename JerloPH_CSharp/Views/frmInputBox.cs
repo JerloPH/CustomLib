@@ -89,5 +89,13 @@ namespace JerloPH_CSharp.Views
         {
             Msg.RefocusParent(this);
         }
+
+        private void frmInputBox_Shown(object sender, EventArgs e)
+        {
+            if (this.Parent != null)
+                CenterToParent();
+            else
+                CenterToScreen();
+        }
     }
 }

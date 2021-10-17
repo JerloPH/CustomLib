@@ -137,6 +137,10 @@ namespace JerloPH_CSharp.Views
             if (BackgroundWorker.IsBusy)
                 return;
             BackgroundWorker.RunWorkerAsync();
+            if (this.Parent != null)
+                CenterToParent();
+            else
+                CenterToScreen();
         }
 
         private void frmLoading_FormClosing(object sender, FormClosingEventArgs e)

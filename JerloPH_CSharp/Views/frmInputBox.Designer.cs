@@ -29,7 +29,6 @@ namespace JerloPH_CSharp.Views
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmInputBox));
             this.lblMessage = new System.Windows.Forms.Label();
             this.cbContents = new System.Windows.Forms.ComboBox();
             this.btnOk = new System.Windows.Forms.Button();
@@ -40,18 +39,18 @@ namespace JerloPH_CSharp.Views
             // lblMessage
             // 
             this.lblMessage.AutoSize = true;
-            this.lblMessage.Font = new System.Drawing.Font("Microsoft Sans Serif", 22.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblMessage.Font = new System.Drawing.Font("Microsoft Sans Serif", 22.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lblMessage.Location = new System.Drawing.Point(15, 27);
             this.lblMessage.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lblMessage.Name = "lblMessage";
-            this.lblMessage.Size = new System.Drawing.Size(174, 44);
+            this.lblMessage.Size = new System.Drawing.Size(171, 42);
             this.lblMessage.TabIndex = 0;
             this.lblMessage.Text = "Message";
             // 
             // cbContents
             // 
             this.cbContents.Cursor = System.Windows.Forms.Cursors.Default;
-            this.cbContents.Font = new System.Drawing.Font("Microsoft Sans Serif", 22.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbContents.Font = new System.Drawing.Font("Microsoft Sans Serif", 22.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.cbContents.FormattingEnabled = true;
             this.cbContents.Location = new System.Drawing.Point(15, 121);
             this.cbContents.Margin = new System.Windows.Forms.Padding(6);
@@ -62,7 +61,7 @@ namespace JerloPH_CSharp.Views
             // 
             // btnOk
             // 
-            this.btnOk.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnOk.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.btnOk.Location = new System.Drawing.Point(183, 235);
             this.btnOk.Margin = new System.Windows.Forms.Padding(6);
             this.btnOk.Name = "btnOk";
@@ -74,7 +73,7 @@ namespace JerloPH_CSharp.Views
             // 
             // btnCancel
             // 
-            this.btnCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.btnCancel.Location = new System.Drawing.Point(365, 235);
             this.btnCancel.Margin = new System.Windows.Forms.Padding(6);
             this.btnCancel.Name = "btnCancel";
@@ -86,7 +85,7 @@ namespace JerloPH_CSharp.Views
             // 
             // txtInput
             // 
-            this.txtInput.Font = new System.Drawing.Font("Microsoft Sans Serif", 22.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtInput.Font = new System.Drawing.Font("Microsoft Sans Serif", 22.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.txtInput.Location = new System.Drawing.Point(15, 180);
             this.txtInput.Name = "txtInput";
             this.txtInput.Size = new System.Drawing.Size(551, 49);
@@ -101,9 +100,8 @@ namespace JerloPH_CSharp.Views
             this.Controls.Add(this.btnOk);
             this.Controls.Add(this.cbContents);
             this.Controls.Add(this.lblMessage);
-            this.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(6);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -111,6 +109,7 @@ namespace JerloPH_CSharp.Views
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "frmInputBox";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmInputBox_FormClosing);
+            this.Shown += new System.EventHandler(this.frmInputBox_Shown);
             this.ResumeLayout(false);
             this.PerformLayout();
 
