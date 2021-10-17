@@ -14,7 +14,8 @@ namespace JerloPH_CSharp
     public static class Msg
     {
         private static string PATH_LOG = "";
-        private static string CAPTION_DIALOG = "";
+
+        public static string CAPTION_DIALOG = "";
 
         public enum LoadIcons
         {
