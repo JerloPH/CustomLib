@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31729.503
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JerloPH_CSharp", "JerloPH_CSharp\JerloPH_CSharp.csproj", "{9BD78378-F494-4463-BC70-47432DF45C4D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JerloPH_CSharp", "JerloPH_CSharp\JerloPH_CSharp.csproj", "{9BD78378-F494-4463-BC70-47432DF45C4D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test", "Test\Test.csproj", "{B30D0D2E-3243-4E8C-BB8E-FE821C4835A7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{9BD78378-F494-4463-BC70-47432DF45C4D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9BD78378-F494-4463-BC70-47432DF45C4D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9BD78378-F494-4463-BC70-47432DF45C4D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B30D0D2E-3243-4E8C-BB8E-FE821C4835A7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B30D0D2E-3243-4E8C-BB8E-FE821C4835A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B30D0D2E-3243-4E8C-BB8E-FE821C4835A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B30D0D2E-3243-4E8C-BB8E-FE821C4835A7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
