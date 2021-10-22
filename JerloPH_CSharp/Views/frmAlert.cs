@@ -16,7 +16,7 @@ namespace JerloPH_CSharp.Views
         {
             InitializeComponent();
         }
-        public frmAlert(string message, string caption, int button, Form parent, Msg.LoadIcons icon)
+        public frmAlert(string message, string caption, Msg.MsgType button, Form parent, Msg.LoadIcons icon)
         {
             InitializeComponent();
             var centerForm = Width / 2; // center point of form
@@ -80,7 +80,7 @@ namespace JerloPH_CSharp.Views
             // Switch type of prompt message
             switch (button)
             {
-                case 1: // Yes, No
+                case Msg.MsgType.YesNo: // Yes, No
                 {
                     btnYes.Enabled = btnYes.Visible = true;
                     btnNo.Enabled = btnNo.Visible = true;
@@ -109,6 +109,7 @@ namespace JerloPH_CSharp.Views
                         btnOk.ForeColor = Color.White;
                         btnOk.BackColor = Color.Black;
                     }
+                    btnOk.DialogResult = DialogResult.OK;
                     break;
                 }
             }

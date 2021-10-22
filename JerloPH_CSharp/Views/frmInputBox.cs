@@ -15,11 +15,11 @@ namespace JerloPH_CSharp.Views
         public string Result { get; set; } = "";
         public List<String> Values { get; set; } = null; // Values already existing
 
-        public frmInputBox(string message, List<String> contents, string defValue)
+        public frmInputBox(string message, List<String> contents, string defValue, string caption)
         {
             InitializeComponent();
             // Initialized Properties
-            this.Text = Msg.CAPTION_DIALOG;
+            this.Text = caption;
             this.AcceptButton = btnOk;
             this.CancelButton = btnCancel;
             // TODO: Add Theme

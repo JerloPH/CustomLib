@@ -29,9 +29,9 @@ namespace JerloPH_CSharp
                 {
                     content = sr.ReadToEnd();
                 }
+                return content;
             }
             catch { throw; }
-            return content;
         }
         public static bool WriteFile(string filename, string content)
         {
@@ -39,10 +39,7 @@ namespace JerloPH_CSharp
             {
                 if (File.Exists(filename))
                     File.Delete(filename);
-            }
-            catch { throw new Exception("Cannot overwrite existing file!"); }
-            try
-            {
+
                 using (StreamWriter sw = new StreamWriter(filename))
                 {
                     sw.Write(content);
@@ -59,7 +56,7 @@ namespace JerloPH_CSharp
                 {
                     using (StreamWriter s = new StreamWriter(fs))
                     {
-                        s.Write(content + (Addline ? "\n" : ""));
+                        s.Write(content + (Addline ? Environment.NewLine : ""));
                         s.Close();
                     }
                     fs.Close();
@@ -69,9 +66,13 @@ namespace JerloPH_CSharp
         }
         public static void PrependFile(string file, string content)
         {
-            string prev = ReadFromFile(file);
-            WriteFile(file, content);
-            AppendFile(file, prev);
+            try
+            {
+                string prev = ReadFromFile(file);
+                if (WriteFile(file, content))
+                    AppendFile(file, prev);
+            }
+            catch { throw; }
         }
 
         public static bool Compress(string filepath)
@@ -122,11 +123,9 @@ namespace JerloPH_CSharp
                     }
                     originalFileStream.Close();
                 }
-                if (File.Exists(newFileName))
-                    return newFileName;
+                return (File.Exists(newFileName) ? newFileName : "");
             }
             catch { throw; }
-            return "";
         }
     }
 }

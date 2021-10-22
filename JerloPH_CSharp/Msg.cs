@@ -14,8 +14,8 @@ namespace JerloPH_CSharp
     public static class Msg
     {
         private static string PATH_LOG = "";
-
-        public static string CAPTION_DIALOG = "";
+        private static string CAPTION_DIALOG = "";
+        private static Form DEF_PARENT = null;
 
         public enum LoadIcons
         {
@@ -27,10 +27,21 @@ namespace JerloPH_CSharp
             Question
         }
 
+        public enum MsgType
+        {
+            Default = 0,
+            YesNo = 1
+        }
+
         public static void Initialize(string _logPath, string _defaultCaption)
         {
             PATH_LOG = _logPath;
             CAPTION_DIALOG = _defaultCaption;
+        }
+
+        public static void SetDefaultParent(Form _parent)
+        {
+            DEF_PARENT = _parent;
         }
 
         public static Image GetImageIcon(LoadIcons IconIndex)
@@ -68,46 +79,49 @@ namespace JerloPH_CSharp
 
         public static frmAlert ShowNoParent(string msg, string caption)
         {
-            var form = new frmAlert(msg, (!String.IsNullOrWhiteSpace(caption) ? caption : CAPTION_DIALOG), 0, null, LoadIcons.Default);
+            var form = new frmAlert(msg, caption, MsgType.Default, null, LoadIcons.Default);
             form.TopMost = true;
             return form;
         }
-        public static void ShowCustomMessage(string msg, string caption, Form parent, LoadIcons icon)
+        public static DialogResult ShowCustomMessage(string msg, string caption, Form caller, LoadIcons icon, MsgType btnType)
         {
+            DialogResult diagres = DialogResult.Cancel;
+            string captiondef = (!String.IsNullOrWhiteSpace(caption) ? caption : CAPTION_DIALOG);
+            Form parent = (caller != null) ? caller : DEF_PARENT;
             try
             {
                 if (parent == null)
                 {
-                    ShowNoParent(msg, caption);
-                    return;
+                    diagres = ShowNoParent(msg, captiondef).ShowDialog();
                 }
                 if (parent.InvokeRequired)
                 {
                     parent.BeginInvoke((Action)delegate
                     {
-                        var form = new frmAlert(msg, caption, 0, parent, icon);
-                        form.ShowDialog(parent);
+                        var form = new frmAlert(msg, captiondef, btnType, parent, icon);
+                        diagres = form.ShowDialog(parent);
                     });
                 }
                 else
                 {
-                    var form = new frmAlert(msg, caption, 0, parent, icon);
-                    form.ShowDialog(parent);
+                    var form = new frmAlert(msg, captiondef, btnType, parent, icon);
+                    diagres = form.ShowDialog(parent);
                 }
+                return diagres;
             }
             catch (Exception ex)
             {
                 Logs.Err(ex);
-                ShowNoParent(msg, caption);
+                return ShowNoParent(msg, captiondef).ShowDialog();
             }
         }
         public static void ShowInfo(string msg, string caption = "", Form parent = null)
         {
-            ShowCustomMessage(msg, caption, parent, LoadIcons.Info);
+            ShowCustomMessage(msg, caption, parent, LoadIcons.Info, 0);
         }
         public static void ShowWarning(string msg, string caption = "", Form parent = null)
         {
-            ShowCustomMessage(msg, caption, parent, LoadIcons.Warning);
+            ShowCustomMessage(msg, caption, parent, LoadIcons.Warning, 0);
         }
         public static void ShowError(string codeFrom, string msg, Form parent, Exception error, bool openLog)
         {
@@ -116,7 +130,7 @@ namespace JerloPH_CSharp
             if (ShowAMsg)
             {
                 string message = "An error occured!";
-                ShowCustomMessage($"{message}\nReport on project site\nand submit 'logs' subfolder.", "Error occured!", parent, LoadIcons.Error);
+                ShowCustomMessage($"{message}\nReport on project site\nand submit 'logs' subfolder.", "Error occured!", parent, LoadIcons.Error, 0);
                 // Open file in explorer
                 if (openLog)
                 {
@@ -141,7 +155,8 @@ namespace JerloPH_CSharp
         {
             try
             {
-                return (new frmAlert(msg, CAPTION_DIALOG, 1, caller, LoadIcons.Question).ShowDialog(caller) == DialogResult.Yes);
+                var result = ShowCustomMessage(msg, "", caller, LoadIcons.Question, MsgType.YesNo);
+                return (result == DialogResult.Yes);
             }
             catch (Exception ex)
             {
@@ -151,22 +166,22 @@ namespace JerloPH_CSharp
         }
 
         // Get string from InputBox
-        public static string GetStringInputBox(string caption, string defaultVal)
+        public static string GetStringInputBox(string msg, string caption, string defVal, List<string> items, List<string> vals)
         {
-            var form = new frmInputBox(caption, null, defaultVal);
-            form.ShowDialog();
-            string value = (!String.IsNullOrWhiteSpace(form.Result)) ? form.Result.Trim() : String.Empty;
-            form.Dispose();
-            return value;
-        }
-        public static string GetStringInputBox(List<string> items, List<string> vals, string caption)
-        {
-            var form = new frmInputBox(caption, items, "");
+            var form = new frmInputBox(msg, items, defVal, (!String.IsNullOrWhiteSpace(caption) ? caption : CAPTION_DIALOG));
             form.Values = vals;
             form.ShowDialog();
             string value = (!String.IsNullOrWhiteSpace(form.Result)) ? form.Result.Trim() : String.Empty;
             form.Dispose();
             return value;
+        }
+        public static string GetStringInputBox(string msg, string defaultVal, string caption)
+        {
+            return GetStringInputBox(msg, caption, defaultVal, null, null);
+        }
+        public static string GetStringInputBox(string msg, string defaultVal)
+        {
+            return GetStringInputBox(msg, "", defaultVal, null, null);
         }
     }
 }
