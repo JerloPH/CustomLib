@@ -94,18 +94,21 @@ namespace JerloPH_CSharp
                 {
                     diagres = ShowNoParent(msg, captiondef).ShowDialog();
                 }
-                if (parent.InvokeRequired)
+                else
                 {
-                    parent.BeginInvoke((Action)delegate
+                    if (parent.InvokeRequired)
+                    {
+                        parent.BeginInvoke((Action)delegate
+                        {
+                            var form = new frmAlert(msg, captiondef, btnType, parent, icon);
+                            diagres = form.ShowDialog(parent);
+                        });
+                    }
+                    else
                     {
                         var form = new frmAlert(msg, captiondef, btnType, parent, icon);
                         diagres = form.ShowDialog(parent);
-                    });
-                }
-                else
-                {
-                    var form = new frmAlert(msg, captiondef, btnType, parent, icon);
-                    diagres = form.ShowDialog(parent);
+                    }
                 }
                 return diagres;
             }
@@ -117,11 +120,11 @@ namespace JerloPH_CSharp
         }
         public static void ShowInfo(string msg, string caption = "", Form parent = null)
         {
-            ShowCustomMessage(msg, caption, parent, LoadIcons.Info, 0);
+            ShowCustomMessage(msg, caption, parent, LoadIcons.Info, MsgType.Default);
         }
         public static void ShowWarning(string msg, string caption = "", Form parent = null)
         {
-            ShowCustomMessage(msg, caption, parent, LoadIcons.Warning, 0);
+            ShowCustomMessage(msg, caption, parent, LoadIcons.Warning, MsgType.Default);
         }
         public static void ShowError(string codeFrom, string msg, Form parent, Exception error, bool openLog)
         {
