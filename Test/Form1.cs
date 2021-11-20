@@ -17,6 +17,7 @@ namespace Test
         public Form1()
         {
             InitializeComponent();
+            CenterToScreen();
         }
 
         private void btnTestLoading_Click(object sender, EventArgs e)
@@ -27,6 +28,13 @@ namespace Test
                 Thread.Sleep(5000);
             };
             form.ShowDialog(this);
+            this.Focus();
+        }
+
+        private void btnTestMessage_Click(object sender, EventArgs e)
+        {
+            Msg.ShowInfo("Hello there!");
+            this.Focus();
         }
     }
 }
